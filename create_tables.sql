@@ -1,0 +1,29 @@
+CREATE TABLE Theatre (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    location VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Screen (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    theatre_id INT NOT NULL,
+    screen_number INT NOT NULL,
+    FOREIGN KEY (theatre_id) REFERENCES Theatre(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Movie (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    language VARCHAR(50) NOT NULL,
+    format VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Shows (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    screen_id INT NOT NULL,
+    movie_id INT NOT NULL,
+    show_date DATE NOT NULL,
+    show_time TIME NOT NULL,
+    FOREIGN KEY (screen_id) REFERENCES Screen(id) ON DELETE CASCADE,
+    FOREIGN KEY (movie_id) REFERENCES Movie(id) ON DELETE CASCADE
+);
